@@ -1,0 +1,22 @@
+{
+  "name": "m003-playwright-javascript-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "e2e-test": "npx cucumber-js --require ./tests/e2e/stepDefinitions/*.js ./tests/e2e/features/*.feature --format @cucumber/pretty-formatter"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.0.1",
+    "@cucumber/pretty-formatter": "^1.0.1",
+    "@playwright/test": "^1.47.2",
+    "@types/node": "^22.6.1",
+    "playwright": "^1.47.2"
+  },
+  "dependencies": {
+    "cucumber": "^6.0.7"
+  }
+}
