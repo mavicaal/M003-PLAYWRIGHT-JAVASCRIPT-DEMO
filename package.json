@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "e2e-test": "npx cucumber-js --require ./tests/e2e/stepDefinitions/*.js ./tests/e2e/features/*.feature --format @cucumber/pretty-formatter"
+    "e2e-test": "npx cucumber-js -p run_options"
   },
   "keywords": [],
   "author": "",
