@@ -1,10 +1,10 @@
-const {Given, When, Then} = require('@cucumber/cucumber');
+import { When, Then } from '@cucumber/cucumber';
 
 When('Customer logs in with {string}', async (user: string) => {
-    await customer.chooseUserFromDropDown(user);
-    await customer.clickOnLoginButton();
+    await (global as any).customer.chooseUserFromDropDown(user);
+    await (global as any).customer.clickOnLoginButton();
 })
 
 Then('{string} account is displayed',async (user: string) => {
-    await customer.validateUserAccountProfile(user);
+    await (global as any).customer.validateUserAccountProfile(user);
 })

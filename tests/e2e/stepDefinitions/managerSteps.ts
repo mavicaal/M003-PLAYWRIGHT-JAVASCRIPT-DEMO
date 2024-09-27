@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 
 Then('Manager profile is displayed', async () => {
-    await manager.validateManagerPage();
+    await (global as any).manager.validateManagerPage();
 });
