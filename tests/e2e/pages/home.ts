@@ -1,14 +1,14 @@
-import { Page } from '@playwright/test';
+import { Page, expect, Locator } from '@playwright/test';
 import { getBtnByLabel, validateUrlContainsText } from '../../../utils';
 
 const pageUrl: string = 'https://www.globalsqa.com/angularJs-protractor/BankingProject/';
 
 class HomePage {
     private page: Page;
-    private customerLoginBtn: HTMLElement | null;
-    private bankManagerLoginBtn: HTMLElement | null;
-    private homeBtn: HTMLElement | null;
-    private bankLabel: HTMLElement | null;
+    private customerLoginBtn: Locator | null;
+    private bankManagerLoginBtn: Locator | null;
+    private homeBtn: Locator | null;
+    private bankLabel: Locator | null;
     private url: string | undefined;
 
     constructor(page: Page) {
@@ -33,7 +33,7 @@ class HomePage {
         await expect(this.bankManagerLoginBtn).toBeVisible();
         await expect(this.homeBtn).toBeVisible();
         await expect(this.bankLabel).toBeVisible();
-        await validateUrlContainsText(this.url, 'login');
+        await validateUrlContainsText(page, 'login');
     }
 
     async clicksCustomerLoginButton(): Promise<void> {

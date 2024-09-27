@@ -1,5 +1,5 @@
 import { Before, BeforeAll, AfterAll, After, setDefaultTimeout } from "@cucumber/cucumber";
-import { chromium, Browser, BrowserContext, Page } from 'playwright';
+import { chromium, Browser, BrowserContext, Page } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import HomePage from '../pages/home';
 import CustomerPage from '../pages/customer';
@@ -26,7 +26,7 @@ declare global {
 BeforeAll(async () => {
     global.browser = await chromium.launch({
         headless: false,
-        slowMo: 1000
+        slowMo: 1000,
     });
     global.data = {
         customer: {
