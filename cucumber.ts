@@ -1,13 +1,11 @@
-let options = [
+let options: string = [
     '--require ./tests/e2e/stepDefinitions/*.js',
     '--format @cucumber/pretty-formatter',
 ].join(' ');
 
-let feature_options = [
+let feature_options: string = [
     './tests/e2e/features/*.feature',
     options,
 ].join(' ');
 
-module.exports = {
-    run_options: feature_options
-}
+export const run_options: string = feature_options;
