@@ -1,7 +1,8 @@
-const { expect } = require("@playwright/test");
+import { expect } from "@playwright/test";
 
 async function getBtnByLabel(page,label){
-    btn = await page.locator(`button:text-is("${label}")`);
+    btn =  await page.getByRole('button', { name: label });
+    // btn = await page.locator(`button:text-is("${label}")`);
     return btn;
 }
 

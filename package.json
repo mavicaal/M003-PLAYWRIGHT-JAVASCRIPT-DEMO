@@ -12,11 +12,13 @@
   "devDependencies": {
     "@cucumber/cucumber": "^11.0.1",
     "@cucumber/pretty-formatter": "^1.0.1",
+    "@faker-js/faker": "^9.0.2",
     "@playwright/test": "^1.47.2",
     "@types/node": "^22.6.1",
     "playwright": "^1.47.2"
   },
   "dependencies": {
-    "cucumber": "^6.0.7"
+    "cucumber": "^6.0.7",
+    "faker": "^6.6.6"
   }
 }

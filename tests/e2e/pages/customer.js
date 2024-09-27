@@ -1,18 +1,29 @@
 const { expect } = require("@playwright/test")
 const { getBtnByLabel, validateUrlContainsText } = require('../../../utils');
 
-class AccountPage {
+class CustomerPage {
     constructor(page){
         this.page = page;
-        this.accountWelcomeLabel = null;
-        this.transactionsBtn = null;
-        this.depositBtn = null;
-        this.withdrawlBtn = null;
+        this.customerLoginBtn = null;
+        this.bankManagerLoginBtn = null;
+        this.userSelector = null;
+        this.loginBtn = null;
+        this.url = null;
+    }
+
+    async chooseUserFromDropDown(user){
+        this.userSelector = await this.page.locator('#userSelect');
+        await this.userSelector.selectOption({label: user});
+    }
+
+    async clickOnLoginButton(){
+        this.loginBtn = await getBtnByLabel(this.page,"Login");
+        await this.loginBtn.click();
     }
 
     async validateUserAccountProfile(user){
         //TODO: This could cause flaky test. Need a review
-        this.accountWelcomeLabel = await this.page.locator(`span:has-text("${user}")`);
+        this.accountWelcomeLabel = await page.getByText(user);
         this.transactionsBtn = await getBtnByLabel(this.page,"Transactions");
         this.depositBtn = await getBtnByLabel(this.page,"Deposit");
         this.withdrawlBtn = await getBtnByLabel(this.page,"Withdrawl");
@@ -24,4 +35,4 @@ class AccountPage {
     }
 }
 
-module.exports = AccountPage;
+module.exports = CustomerPage;
