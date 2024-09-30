@@ -19,11 +19,11 @@ class HomePage {
         this.bankLabel = null;
     }
 
-    async goToHomePage(): Promise<void> {
+    async goToHomePage() {
         await this.page.goto(pageUrl);
     }
 
-    async validateHomePageIsRendered(): Promise<void> {
+    async validateHomePageIsRendered(){
         this.customerLoginBtn = await getBtnByLabel(this.page, "Customer Login");
         this.bankManagerLoginBtn = await getBtnByLabel(this.page, "Bank Manager Login");
         this.homeBtn = await getBtnByLabel(this.page, "Home");
@@ -36,12 +36,12 @@ class HomePage {
         await validateUrlContainsText(page, 'login');
     }
 
-    async clicksCustomerLoginButton(): Promise<void> {
+    async clicksCustomerLoginButton(){
         this.customerLoginBtn = await getBtnByLabel(this.page, "Customer Login");
         await this.customerLoginBtn.click();
     }
 
-    async clicksBankManagerLoginButton(): Promise<void> {
+    async clicksBankManagerLoginButton() {
         this.bankManagerLoginBtn = await getBtnByLabel(this.page, "Bank Manager Login");
         await this.bankManagerLoginBtn.click();
     }

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "cucumber-js --require-module ts-node/register --require tests/e2e/stepDefinitions/*.ts tests/e2e/features/*.feature"
+    "test": "cucumber-js --require-module ts-node/register --require tests/e2e/stepDefinitions/*.ts tests/e2e/features/*.feature --tags @smoke"
   },
   "keywords": [],
   "author": "",

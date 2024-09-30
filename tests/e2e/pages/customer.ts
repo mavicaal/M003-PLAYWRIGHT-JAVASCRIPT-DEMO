@@ -22,17 +22,17 @@ class CustomerPage {
         this.url = null;
     }
 
-    async chooseUserFromDropDown(user: string): Promise<void> {
+    async chooseUserFromDropDown(user: string) {
         this.userSelector = await this.page.locator('#userSelect');
         await this.userSelector.selectOption({ label: user });
     }
 
-    async clickOnLoginButton(): Promise<void> {
+    async clickOnLoginButton() {
         this.loginBtn = await getBtnByLabel(this.page, "Login");
         await this.loginBtn.click();
     }
 
-    async validateUserAccountProfile(user: string): Promise<void> {
+    async validateUserAccountProfile(user: string) {
         this.accountWelcomeLabel = await this.page.getByText(user);
         this.transactionsBtn = await getBtnByLabel(this.page, "Transactions");
         this.depositBtn = await getBtnByLabel(this.page, "Deposit");

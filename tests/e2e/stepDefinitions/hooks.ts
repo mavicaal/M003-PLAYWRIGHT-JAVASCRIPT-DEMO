@@ -26,7 +26,7 @@ declare global {
 BeforeAll(async () => {
     global.browser = await chromium.launch({
         headless: false,
-        slowMo: 1000,
+        slowMo: 500,
     });
     global.data = {
         customer: {
@@ -42,7 +42,9 @@ AfterAll(async () => {
 });
 
 Before(async function () {
-    global.context = await global.browser.newContext();
+    global.context = await global.browser.newContext({
+        ignoreHTTPSErrors:true
+    });
     global.page = await global.context.newPage();
     global.home = new HomePage(global.page); 
     global.customer = new CustomerPage(global.page);
