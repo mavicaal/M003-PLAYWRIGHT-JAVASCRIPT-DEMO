@@ -4,6 +4,7 @@ import { faker } from '@faker-js/faker';
 import HomePage from '../pages/home';
 import CustomerPage from '../pages/customer';
 import ManagerPage from '../pages/manager';
+import Utils from '../../../utils';
 
 setDefaultTimeout(65000);
 
@@ -14,6 +15,7 @@ declare global {
     var home: HomePage;
     var customer: CustomerPage;
     var manager: ManagerPage;
+    var utils: Utils;
     var data: {
         customer: {
             firstName: string;
@@ -49,6 +51,7 @@ Before(async function () {
     global.home = new HomePage(global.page); 
     global.customer = new CustomerPage(global.page);
     global.manager = new ManagerPage(global.page);
+    global.utils = new Utils(global.page);
 });
 
 After(async function () {

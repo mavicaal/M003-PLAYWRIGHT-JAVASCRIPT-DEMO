@@ -1,8 +1,9 @@
+@smoke
 Feature: Customer Login
 
     Scenario Outline: Customer logs in with any default user
         Given User goes to XYZ Bank Home page
-        When User clicks "Customer" Login button
+        When User clicks on "Customer" button
         And Customer logs in with "<user>"
         Then "<user>" account is displayed
 
