@@ -2,21 +2,23 @@
   "name": "m003-playwright-javascript-demo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "e2e-test": "npx cucumber-js -p run_options"
+    "test": "cucumber-js --require-module ts-node/register --require tests/e2e/stepDefinitions/*.ts tests/e2e/features/*.feature --format @cucumber/pretty-formatter --tags @smoke"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@cucumber/cucumber": "^11.0.1",
-    "@cucumber/pretty-formatter": "^1.0.1",
+    "@faker-js/faker": "^9.0.3",
     "@playwright/test": "^1.47.2",
-    "@types/node": "^22.6.1",
-    "playwright": "^1.47.2"
+    "@types/node": "^22.7.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
   },
   "dependencies": {
-    "cucumber": "^6.0.7"
+    "@cucumber/pretty-formatter": "^1.0.1",
+    "playwright": "^1.47.2"
   }
 }
