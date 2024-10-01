@@ -1,6 +1,19 @@
 {
-    "compilerOptions": {
-      "module": "commonjs",
-      "target": "es2015"
-    }
-  }
+  // "compilerOptions": {
+  //   "target": "es2020", // Adjust to your target environment
+  //   // "module": "esnext", // Or "commonjs" if needed
+  //   // "strict": true, // Enable strict type checking
+  //   // "esModuleInterop": true, // Improve interoperability with CommonJS modules
+  //   // "forceConsistentCasingInFileNames": true, // Enforce consistent casing
+  //   // "noImplicitAny": true, // Prevent implicit any types
+  //   // "noImplicitReturns": true, // Ensure all code paths return a value
+  //   // "noUnusedLocals": true, // Report unused local variables
+  //   // "noUnusedParameters": true, // Report unused function parameters
+  //   // "noFallthroughCasesInSwitch": true, // Prevent fallthrough in switch statements
+  //   // "outDir": "./dist", // Specify output directory
+  //   // "sourceMap": true, // Generate source maps for debugging
+  //   // "declaration": true // Generate declaration files (.d.ts)
+  // },
+  // // "include": ["tests/**/*","./utils.ts", "./playwright.config.ts"],
+  // // "exclude": ["node_modules", "dist"] // Exclude directories from compilation
+}
