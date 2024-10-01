@@ -4,8 +4,8 @@ When('User adds new customer', async () => {
     await (global as any).manager.addCustomer();
 }) 
 
-When('User opens new acount to new user', async () => {
-    
+When('User opens new {string} acount to new user', async (currency) => {
+    await (global as any).manager.opensAccountToUser(currency);
 })
 
 Then('Manager profile is displayed', async () => {

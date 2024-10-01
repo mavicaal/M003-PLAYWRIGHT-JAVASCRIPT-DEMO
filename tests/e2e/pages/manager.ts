@@ -11,6 +11,9 @@ class ManagerPage {
     private firstNameCell: Locator | null;
     private lastNameCell: Locator | null;
     private postalCodeCell: Locator | null;
+    private userSelector: Locator | null;
+    private currencySelector: Locator | null;
+    private accountsCell: Locator | null;
     private url: string | null;
 
     constructor(page: any) {
@@ -22,6 +25,9 @@ class ManagerPage {
         this.firstNameCell = null;
         this.lastNameCell = null;
         this.postalCodeCell = null;
+        this.accountsCell = null;
+        this.userSelector = null;
+        this.currencySelector = null;
         this.url = null;
     }
 
@@ -63,6 +69,7 @@ class ManagerPage {
                    break;    
                 } 
                 case "accounts": { 
+                   this.accountsCell =  await page.getByRole('row', { name: `${data.customer.firstName} ${data.customer.lastName} ${data.customer.zipCode}` }).getByRole('cell').nth(3);
                    break; 
                 }  
                 default: { 
@@ -70,6 +77,14 @@ class ManagerPage {
                 } 
              }
         }
+    }
+
+    async opensAccountToUser(currency){
+        this.userSelector = await this.page.locator('#userSelect');
+        await this.userSelector.selectOption({ label: `${data.customer.firstName} ${data.customer.lastName}` });
+        this.currencySelector = await page.locator('#currency');
+        await this.currencySelector.selectOption(currency);
+        await utils.clicksButton("Process");
     }
 }
 
