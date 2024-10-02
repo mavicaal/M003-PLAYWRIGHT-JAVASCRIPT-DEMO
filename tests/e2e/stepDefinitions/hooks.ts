@@ -11,13 +11,15 @@ import HomePage from '../pages/home';
 import CustomerPage from '../pages/customer';
 import ManagerPage from '../pages/manager';
 import Utils from '../pages/utils';
+import { pageFixture } from '../pageFixture';
 
 setDefaultTimeout(65000);
 
+let browser: Browser;
+let context: BrowserContext;
+let page: Page;
+
 declare global {
-  var browser: Browser;
-  var context: BrowserContext;
-  var page: Page;
   var home: HomePage;
   var customer: CustomerPage;
   var manager: ManagerPage;
@@ -32,7 +34,7 @@ declare global {
 }
 
 BeforeAll(async () => {
-  global.browser = await chromium.launch({
+  browser = await chromium.launch({
     headless: false,
     slowMo: 500,
   });
@@ -46,21 +48,22 @@ BeforeAll(async () => {
 });
 
 AfterAll(async () => {
-  await global.browser.close();
+  await browser.close();
 });
 
 Before(async function () {
-  global.context = await global.browser.newContext({
+  context = await browser.newContext({
     ignoreHTTPSErrors: true,
   });
-  global.page = await global.context.newPage();
-  global.home = new HomePage(global.page);
-  global.customer = new CustomerPage(global.page);
-  global.manager = new ManagerPage(global.page);
-  global.utils = new Utils(global.page);
+  page = await context.newPage();
+  pageFixture.page = page;
+  global.home = new HomePage(page);
+  global.customer = new CustomerPage(page);
+  global.manager = new ManagerPage(page);
+  global.utils = new Utils(page);
 });
 
 After(async function () {
-  await global.page.close();
-  await global.context.close();
+  await page.close();
+  await context.close();
 });

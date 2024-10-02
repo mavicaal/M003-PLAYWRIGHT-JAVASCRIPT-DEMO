@@ -55,28 +55,28 @@ class ManagerPage {
     for (const attr of attrsList) {
       switch (attr) {
         case 'firstName': {
-          this.firstNameCell = await page.getByRole('cell', {
+          this.firstNameCell = await this.page.getByRole('cell', {
             name: (global as any).data.customer.firstName,
           });
           await expect(this.firstNameCell).toBeVisible();
           break;
         }
         case 'lastName': {
-          this.lastNameCell = await page.getByRole('cell', {
+          this.lastNameCell = await this.page.getByRole('cell', {
             name: (global as any).data.customer.lastName,
           });
           await expect(this.lastNameCell).toBeVisible();
           break;
         }
         case 'postalCode': {
-          this.postalCodeCell = await page.getByRole('cell', {
+          this.postalCodeCell = await this.page.getByRole('cell', {
             name: (global as any).data.customer.zipCode,
           });
           await expect(this.postalCodeCell).toBeVisible();
           break;
         }
         case 'accounts': {
-          this.accountsCell = await page
+          this.accountsCell = await this.page
             .getByRole('row', {
               name: `${data.customer.firstName} ${data.customer.lastName} ${data.customer.zipCode}`,
             })
@@ -96,7 +96,7 @@ class ManagerPage {
     await this.userSelector.selectOption({
       label: `${data.customer.firstName} ${data.customer.lastName}`,
     });
-    this.currencySelector = await page.locator('#currency');
+    this.currencySelector = await this.page.locator('#currency');
     await this.currencySelector.selectOption(currency);
     await utils.clicksButton('Process');
   }
