@@ -1,25 +1,24 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Locator, expect } from '@playwright/test';
 import { validatesButtonIsVisible, validateUrlContainsText } from '../utils';
+import { pageFixture } from '../fixture';
 
 class CustomerPage {
-  private page: Page;
   private userSelector: Locator | null;
   private accountWelcomeLabel: Locator | null;
   private url: string | null;
 
-  constructor(page: Page) {
-    this.page = page;
+  constructor() {
     this.userSelector = null;
     this.url = null;
   }
 
   async chooseUserFromDropDown(user: string) {
-    this.userSelector = await this.page.locator('#userSelect');
+    this.userSelector = await pageFixture.page.locator('#userSelect');
     await this.userSelector.selectOption({ label: user });
   }
 
   async validateUserAccountProfile(user: string) {
-    this.accountWelcomeLabel = await this.page.getByText(user);
+    this.accountWelcomeLabel = await pageFixture.page.getByText(user);
     await validatesButtonIsVisible('Transactions');
     await validatesButtonIsVisible('Deposit');
     await validatesButtonIsVisible('Withdrawl');

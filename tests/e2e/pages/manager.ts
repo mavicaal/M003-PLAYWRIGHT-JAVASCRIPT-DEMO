@@ -1,5 +1,5 @@
 import { expect, Locator } from '@playwright/test';
-import { Page } from 'playwright';
+import { pageFixture, dataFixture } from '../fixture';
 import {
   validatesButtonIsVisible,
   validateUrlContainsText,
@@ -7,7 +7,6 @@ import {
 } from '../utils';
 
 class ManagerPage {
-  private page: Page;
   private firstNameInput: Locator | null;
   private lastNameInput: Locator | null;
   private postalCodeInput: Locator | null;
@@ -20,8 +19,7 @@ class ManagerPage {
   private accountsCell: Locator | null;
   private url: string | null;
 
-  constructor(page: any) {
-    this.page = page;
+  constructor() {
     this.firstNameInput = null;
     this.lastNameInput = null;
     this.postalCodeInput = null;
@@ -43,47 +41,47 @@ class ManagerPage {
   }
 
   async addCustomer() {
-    this.firstNameInput = await this.page.getByPlaceholder('First Name');
-    this.lastNameInput = await this.page.getByPlaceholder('Last Name');
-    this.postalCodeInput = await this.page.getByPlaceholder('Post Code');
-    this.addCustomerSubmitBtn = await this.page.locator(
+    this.firstNameInput = await pageFixture.page.getByPlaceholder('First Name');
+    this.lastNameInput = await pageFixture.page.getByPlaceholder('Last Name');
+    this.postalCodeInput = await pageFixture.page.getByPlaceholder('Post Code');
+    this.addCustomerSubmitBtn = await pageFixture.page.locator(
       'button[type="submit"]',
     );
-    await this.firstNameInput.fill(data.customer.firstName);
-    await this.lastNameInput.fill(data.customer.lastName);
-    await this.postalCodeInput.fill(data.customer.zipCode);
+    await this.firstNameInput.fill(dataFixture.customer.firstName);
+    await this.lastNameInput.fill(dataFixture.customer.lastName);
+    await this.postalCodeInput.fill(dataFixture.customer.zipCode);
     await this.addCustomerSubmitBtn.click();
   }
 
   async newUserIsVisibleInCustomersTable(attributes) {
-    let attrsList: Array<string> = await attributes.split(',');
+    const attrsList: Array<string> = await attributes.split(',');
     for (const attr of attrsList) {
       switch (attr) {
         case 'firstName': {
-          this.firstNameCell = await this.page.getByRole('cell', {
-            name: (global as any).data.customer.firstName,
+          this.firstNameCell = await pageFixture.page.getByRole('cell', {
+            name: dataFixture.customer.firstName,
           });
           await expect(this.firstNameCell).toBeVisible();
           break;
         }
         case 'lastName': {
-          this.lastNameCell = await this.page.getByRole('cell', {
-            name: (global as any).data.customer.lastName,
+          this.lastNameCell = await pageFixture.page.getByRole('cell', {
+            name: dataFixture.customer.lastName,
           });
           await expect(this.lastNameCell).toBeVisible();
           break;
         }
         case 'postalCode': {
-          this.postalCodeCell = await this.page.getByRole('cell', {
-            name: (global as any).data.customer.zipCode,
+          this.postalCodeCell = await pageFixture.page.getByRole('cell', {
+            name: dataFixture.customer.zipCode,
           });
           await expect(this.postalCodeCell).toBeVisible();
           break;
         }
         case 'accounts': {
-          this.accountsCell = await this.page
+          this.accountsCell = await pageFixture.page
             .getByRole('row', {
-              name: `${data.customer.firstName} ${data.customer.lastName} ${data.customer.zipCode}`,
+              name: `${dataFixture.customer.firstName} ${dataFixture.customer.lastName} ${dataFixture.customer.zipCode}`,
             })
             .getByRole('cell')
             .nth(3);
@@ -97,11 +95,11 @@ class ManagerPage {
   }
 
   async opensAccountToUser(currency) {
-    this.userSelector = await this.page.locator('#userSelect');
+    this.userSelector = await pageFixture.page.locator('#userSelect');
     await this.userSelector.selectOption({
-      label: `${data.customer.firstName} ${data.customer.lastName}`,
+      label: `${dataFixture.customer.firstName} ${dataFixture.customer.lastName}`,
     });
-    this.currencySelector = await this.page.locator('#currency');
+    this.currencySelector = await pageFixture.page.locator('#currency');
     await this.currencySelector.selectOption(currency);
     await clicksButton('Process');
   }

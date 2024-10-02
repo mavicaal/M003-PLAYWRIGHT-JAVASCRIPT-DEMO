@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "cucumber-js --require-module ts-node/register --require tests/e2e/stepDefinitions/*.ts tests/e2e/features/*.feature --format @cucumber/pretty-formatter --tags @smoke",
+    "test": "cucumber-js --require-module ts-node/register --require tests/e2e/**/*.ts tests/e2e/features/*.feature --format @cucumber/pretty-formatter --tags @smoke",
     "prettier-format": "prettier --config .prettierrc ./**/*.ts ./**/*.mjs --write",
     "lint": "npx eslint"
   },
