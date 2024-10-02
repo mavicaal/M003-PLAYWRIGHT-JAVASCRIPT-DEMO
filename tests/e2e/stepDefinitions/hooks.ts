@@ -10,8 +10,7 @@ import { faker } from '@faker-js/faker';
 import HomePage from '../pages/home';
 import CustomerPage from '../pages/customer';
 import ManagerPage from '../pages/manager';
-import Utils from '../pages/utils';
-import { pageFixture } from '../pageFixture';
+import { pageFixture } from '../fixture';
 
 setDefaultTimeout(65000);
 
@@ -20,10 +19,8 @@ let context: BrowserContext;
 let page: Page;
 
 declare global {
-  var home: HomePage;
   var customer: CustomerPage;
   var manager: ManagerPage;
-  var utils: Utils;
   var data: {
     customer: {
       firstName: string;
@@ -57,10 +54,8 @@ Before(async function () {
   });
   page = await context.newPage();
   pageFixture.page = page;
-  global.home = new HomePage(page);
   global.customer = new CustomerPage(page);
   global.manager = new ManagerPage(page);
-  global.utils = new Utils(page);
 });
 
 After(async function () {

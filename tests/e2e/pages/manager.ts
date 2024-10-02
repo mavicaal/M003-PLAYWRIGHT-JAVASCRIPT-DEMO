@@ -1,5 +1,10 @@
 import { expect, Locator } from '@playwright/test';
 import { Page } from 'playwright';
+import {
+  validatesButtonIsVisible,
+  validateUrlContainsText,
+  clicksButton,
+} from '../utils';
 
 class ManagerPage {
   private page: Page;
@@ -31,10 +36,10 @@ class ManagerPage {
   }
 
   async validateManagerPage() {
-    await utils.validatesButtonIsVisible('Add Customer');
-    await utils.validatesButtonIsVisible('Open Account');
-    await utils.validatesButtonIsVisible('Customers');
-    await utils.validateUrlContainsText('manager');
+    await validatesButtonIsVisible('Add Customer');
+    await validatesButtonIsVisible('Open Account');
+    await validatesButtonIsVisible('Customers');
+    await validateUrlContainsText('manager');
   }
 
   async addCustomer() {
@@ -98,7 +103,7 @@ class ManagerPage {
     });
     this.currencySelector = await this.page.locator('#currency');
     await this.currencySelector.selectOption(currency);
-    await utils.clicksButton('Process');
+    await clicksButton('Process');
   }
 }
 

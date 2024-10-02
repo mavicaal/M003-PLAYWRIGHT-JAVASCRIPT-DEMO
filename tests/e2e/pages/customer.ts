@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { validatesButtonIsVisible, validateUrlContainsText } from '../utils';
 
 class CustomerPage {
   private page: Page;
@@ -19,11 +20,11 @@ class CustomerPage {
 
   async validateUserAccountProfile(user: string) {
     this.accountWelcomeLabel = await this.page.getByText(user);
-    await utils.validatesButtonIsVisible('Transactions');
-    await utils.validatesButtonIsVisible('Deposit');
-    await utils.validatesButtonIsVisible('Withdrawl');
+    await validatesButtonIsVisible('Transactions');
+    await validatesButtonIsVisible('Deposit');
+    await validatesButtonIsVisible('Withdrawl');
     await expect(this.accountWelcomeLabel).toBeVisible();
-    await utils.validateUrlContainsText('account');
+    await validateUrlContainsText('account');
   }
 }
 
