@@ -1,15 +1,23 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import { When, Then } from '@cucumber/cucumber';
+import ManagerPage from '../pages/manager';
+
+const manager = new ManagerPage();
 
 When('User adds new customer', async () => {
-    await (global as any).manager.addCustomer();
-}) 
-
-Then('Manager profile is displayed', async () => {
-    await (global as any).manager.validateManagerPage();
+  await manager.addCustomer();
 });
 
-Then ('Attributes {string} of new user are displayed', async (attributes:string) => {
-    await (global as any).manager.newUserIsVisibleInCustomersTable(attributes);
-})
+When('User opens new {string} acount to new user', async (currency) => {
+  await manager.opensAccountToUser(currency);
+});
 
+Then('Manager profile is displayed', async () => {
+  await manager.validateManagerPage();
+});
 
+Then(
+  'Attributes {string} of new user are displayed',
+  async (attributes: string) => {
+    await manager.newUserIsVisibleInCustomersTable(attributes);
+  },
+);

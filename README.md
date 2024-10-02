@@ -4,3 +4,5 @@
 1. Install and initialize the framework:
     1.1.  ```npm install```
 2. To run the regression test execute : ```npm run test```
+
+npx eslint --flag unstable_ts_config
