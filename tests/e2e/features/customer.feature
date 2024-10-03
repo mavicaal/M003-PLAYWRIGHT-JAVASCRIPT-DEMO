@@ -1,4 +1,3 @@
-@smoke
 Feature: Customer Login
 
     Scenario Outline: Customer logs in with any default user

@@ -10,6 +10,10 @@ When('Customer logs in with {string}', async (user: string) => {
   await clicksButton('Login');
 });
 
+Then('{string} option is not displayed', async (user: string) => {
+  await customer.validateUserDoesNotExistInLogin(user);
+});
+
 Then('{string} account is displayed', async (user: string) => {
   await customer.validateUserAccountProfile(user);
 });
