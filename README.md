@@ -5,4 +5,7 @@
      ```npm install```
 2. Run ``` npm run lint ``` to fix any typescript lint errors
 3. Run ``` npm run prettier-format ``` to fix any format code errors (fixed according best practices)
-4. To run the regression test execute : ```npm run test```
+
+## Run tests
+1. To run the regression test execute : ```npm run regression-test```
+2. To run the smoke test execute : ```npm run smoke-test```

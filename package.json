@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "cucumber-js --require-module ts-node/register --require tests/e2e/**/*.ts tests/e2e/features/*.feature --format @cucumber/pretty-formatter --tags @smoke",
+    "smoke-test": "cucumber-js --require-module ts-node/register --require tests/e2e/**/*.ts tests/e2e/features/*.feature --format @cucumber/pretty-formatter --tags @smoke",
+    "regression-test": "cucumber-js --require-module ts-node/register --require tests/e2e/**/*.ts tests/e2e/features/*.feature --format @cucumber/pretty-formatter",
     "prettier-format": "prettier --config .prettierrc ./**/*.ts ./**/*.mjs --write",
     "lint": "npx eslint"
   },

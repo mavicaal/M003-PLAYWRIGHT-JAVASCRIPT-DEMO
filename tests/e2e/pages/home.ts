@@ -1,9 +1,10 @@
 import { expect, Locator } from '@playwright/test';
 import { pageFixture } from '../fixture';
-import { validatesButtonIsVisible, validateUrlContainsText } from '../utils';
-
-const pageUrl: string =
-  'https://www.globalsqa.com/angularJs-protractor/BankingProject/';
+import {
+  validatesButtonIsVisible,
+  validateUrlContainsText,
+  retryGoTo,
+} from '../utils';
 
 class HomePage {
   private bankLabel: Locator | null;
@@ -14,7 +15,7 @@ class HomePage {
   }
 
   async goToHomePage() {
-    await pageFixture.page.goto(pageUrl);
+    await retryGoTo(pageFixture.baseUrl, 3);
   }
 
   async validateHomePageIsRendered() {

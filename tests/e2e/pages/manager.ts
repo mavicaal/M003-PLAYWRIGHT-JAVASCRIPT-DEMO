@@ -17,6 +17,7 @@ class ManagerPage {
   private userSelector: Locator | null;
   private currencySelector: Locator | null;
   private accountsCell: Locator | null;
+  private deletesCell: Locator | null;
   private url: string | null;
 
   constructor() {
@@ -30,6 +31,7 @@ class ManagerPage {
     this.accountsCell = null;
     this.userSelector = null;
     this.currencySelector = null;
+    this.deletesCell = null;
     this.url = null;
   }
 
@@ -53,7 +55,7 @@ class ManagerPage {
     await this.addCustomerSubmitBtn.click();
   }
 
-  async newUserIsVisibleInCustomersTable(attributes) {
+  async newUserIsVisibleInCustomersTable(attributes: string) {
     const attrsList: Array<string> = await attributes.split(',');
     for (const attr of attrsList) {
       switch (attr) {
@@ -96,7 +98,7 @@ class ManagerPage {
     }
   }
 
-  async opensAccountToUser(currency) {
+  async opensAccountToUser(currency: string) {
     this.userSelector = await pageFixture.page.locator('#userSelect');
     await this.userSelector.selectOption({
       label: `${dataFixture.customer.firstName} ${dataFixture.customer.lastName}`,
@@ -104,6 +106,21 @@ class ManagerPage {
     this.currencySelector = await pageFixture.page.locator('#currency');
     await this.currencySelector.selectOption(currency);
     await clicksButton('Process');
+  }
+
+  async removesCustomer(customer: string) {
+    customer =
+      customer === 'New User'
+        ? `${dataFixture.customer.firstName} ${dataFixture.customer.lastName}`
+        : customer;
+    this.deletesCell = await pageFixture.page
+      .getByRole('row', {
+        name: customer,
+      })
+      .getByRole('cell')
+      .nth(4);
+    await this.deletesCell.getByRole('button', { name: 'Delete' }).click();
+    await expect(this.deletesCell).toHaveCount(0);
   }
 }
 

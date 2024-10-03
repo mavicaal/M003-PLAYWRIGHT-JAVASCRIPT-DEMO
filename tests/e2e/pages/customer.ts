@@ -37,6 +37,22 @@ class CustomerPage {
     await expect(this.accountWelcomeLabel).toBeVisible();
     await validateUrlContainsText('account');
   }
+
+  async validateUserDoesNotExistInLogin(user: string) {
+    this.userSelector = await pageFixture.page.locator('#userSelect');
+    let options: string[] = await this.userSelector.allInnerTexts();
+    options = options[0].split('\n');
+    let flag: boolean = false;
+    user =
+      user === 'New User'
+        ? `${dataFixture.customer.firstName} ${dataFixture.customer.lastName}`
+        : user;
+    for (const option of options) {
+      const text = await option;
+      flag = flag || user === text;
+    }
+    expect(flag).toBe(false);
+  }
 }
 
 export default CustomerPage;
