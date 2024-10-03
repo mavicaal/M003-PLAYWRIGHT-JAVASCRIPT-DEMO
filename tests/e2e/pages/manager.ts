@@ -85,6 +85,8 @@ class ManagerPage {
             })
             .getByRole('cell')
             .nth(3);
+          const children = await this.accountsCell.allTextContents();
+          expect(await children.length).toBe(1);
           break;
         }
         default: {

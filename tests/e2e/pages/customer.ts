@@ -1,6 +1,6 @@
 import { Locator, expect } from '@playwright/test';
 import { validatesButtonIsVisible, validateUrlContainsText } from '../utils';
-import { pageFixture } from '../fixture';
+import { pageFixture, dataFixture } from '../fixture';
 
 class CustomerPage {
   private userSelector: Locator | null;
@@ -14,14 +14,26 @@ class CustomerPage {
 
   async chooseUserFromDropDown(user: string) {
     this.userSelector = await pageFixture.page.locator('#userSelect');
-    await this.userSelector.selectOption({ label: user });
+    if (user == 'New User') {
+      await this.userSelector.selectOption({
+        label: `${dataFixture.customer.firstName} ${dataFixture.customer.lastName}`,
+      });
+    } else {
+      await this.userSelector.selectOption({ label: user });
+    }
   }
 
   async validateUserAccountProfile(user: string) {
-    this.accountWelcomeLabel = await pageFixture.page.getByText(user);
-    await validatesButtonIsVisible('Transactions');
-    await validatesButtonIsVisible('Deposit');
-    await validatesButtonIsVisible('Withdrawl');
+    if (user == 'New User') {
+      this.accountWelcomeLabel = await pageFixture.page.getByText(
+        `${dataFixture.customer.firstName} ${dataFixture.customer.lastName}`,
+      );
+    } else {
+      this.accountWelcomeLabel = await pageFixture.page.getByText(user);
+      await validatesButtonIsVisible('Transactions');
+      await validatesButtonIsVisible('Deposit');
+      await validatesButtonIsVisible('Withdrawl');
+    }
     await expect(this.accountWelcomeLabel).toBeVisible();
     await validateUrlContainsText('account');
   }
